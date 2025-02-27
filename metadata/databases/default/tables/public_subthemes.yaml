@@ -1,0 +1,16 @@
+table:
+  name: subthemes
+  schema: public
+object_relationships:
+  - name: theme
+    using:
+      foreign_key_constraint_on: theme_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - value
+        - label
+        - theme_id
+      filter: {}
