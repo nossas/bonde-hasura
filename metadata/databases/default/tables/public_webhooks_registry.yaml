@@ -1,0 +1,3 @@
+table:
+  name: webhooks_registry
+  schema: public

@@ -1,0 +1,3 @@
+table:
+  name: activist_actions
+  schema: log
