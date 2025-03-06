@@ -1,0 +1,48 @@
+name: Deploy Hasura Migrations
+
+on:
+  push:
+    tags:
+      - 'v*'  # Dispara quando uma tag como 'v1.0.0' é criada
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar o Hasura CLI
+        run: |
+          curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
+          echo "$HOME/.hasura/bin" >> $GITHUB_PATH  # Adiciona o Hasura CLI ao PATH
+          hasura version  # Verifica se a instalação foi bem-sucedida
+
+      - name: Verificar e Aplicar migrações para todos os bancos de dados
+        env:
+          HASURA_GRAPHQL_ENDPOINT: ${{ secrets.HASURA_GRAPHQL_ENDPOINT }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+        run: |
+          DATABASES=("default" "votepeloclima") # Defina os nomes dos bancos aqui
+
+          for DB in "${DATABASES[@]}"; do
+            echo "Verificando status das migrações para o banco: $DB"
+            hasura migrate status \
+              --endpoint "$HASURA_GRAPHQL_ENDPOINT" \
+              --admin-secret "$HASURA_GRAPHQL_ADMIN_SECRET" \
+              --database-name "$DB"
+
+            echo "Aplicando migrações para o banco: $DB"
+            hasura migrate apply \
+              --endpoint "$HASURA_GRAPHQL_ENDPOINT" \
+              --admin-secret "$HASURA_GRAPHQL_ADMIN_SECRET" \
+              --database-name "$DB"
+          done
+
+      - name: Aplicar metadata
+        env:
+          HASURA_GRAPHQL_ENDPOINT: ${{ secrets.HASURA_GRAPHQL_ENDPOINT }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+        run: |
+          hasura metadata apply --endpoint "$HASURA_GRAPHQL_ENDPOINT" --admin-secret "$HASURA_GRAPHQL_ADMIN_SECRET"
