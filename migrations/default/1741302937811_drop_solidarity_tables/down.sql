@@ -1,0 +1,6 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- drop table public.solidarity_matches;
+-- drop table public.solidarity_tickets;
+-- drop table public.solidarity_users;
+-- drop table public.solidarity_zd_tickes;
