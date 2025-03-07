@@ -22,6 +22,19 @@ type Mutation {
   ): DeleteRecordsResult
 }
 
+type Mutation {
+  router_add_operation(
+    domains: [String]!
+    operation: String!
+  ): JSON
+}
+
+type Query {
+  router_task_status(
+    task_id: String!
+  ): JSON
+}
+
 input DomainInput {
   domain_name: String!
   community_id: Int!
@@ -125,4 +138,6 @@ type UpdateCertificateResult {
 }
 
 scalar String
+
+scalar JSON
 
