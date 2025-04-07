@@ -1,3 +1,14 @@
 table:
   name: widget_actions
   schema: public
+event_triggers:
+  - name: webhook-an-widget-actions
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{N8N_WEBHOOK_URL}}/action-network/activist_action'
