@@ -1,0 +1,1 @@
+ALTER TABLE public.widgets ADD COLUMN mobilization_id int4 NULL; ALTER TABLE public.widgets ADD CONSTRAINT widgets_mobilization_id_fkey FOREIGN KEY (mobilization_id) REFERENCES public.mobilizations(id);

@@ -1,3 +1,17 @@
 table:
   name: activist_actions
   schema: analyze
+event_triggers:
+  - name: action_create_analyze_activist_actions_n8n
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{N8N_WEBHOOK_TRIGGER_POSTGRES_URL}}'
+    headers:
+      - name: Authorization
+        value: Basic {{N8N_WEBHOOK_TRIGGER_POSTGRES_AUTH}}

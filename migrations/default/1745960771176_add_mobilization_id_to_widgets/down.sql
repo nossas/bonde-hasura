@@ -1,0 +1,1 @@
+ALTER TABLE public.widgets DROP CONSTRAINT widgets_mobilization_id_fkey; ALTER TABLE public.widgets DROP COLUMN mobilization_id;
