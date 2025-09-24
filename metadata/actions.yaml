@@ -37,6 +37,9 @@ actions:
         template_engine: Kriti
         url: '{{$base_url}}/add-operation'
         version: 2
+    permissions:
+      - role: user
+    comment: Método da Bonde Router API usado para realizar operações com domínios e certificados.
   - name: router_task_status
     definition:
       kind: ""
