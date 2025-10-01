@@ -1,6 +1,14 @@
 table:
   name: activist_actions
   schema: analyze
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - widget_id
+      filter: {}
+      allow_aggregations: true
+    comment: ""
 event_triggers:
   - name: action_create_analyze_activist_actions_n8n
     definition:

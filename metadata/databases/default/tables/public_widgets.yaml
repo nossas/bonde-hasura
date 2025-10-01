@@ -26,6 +26,15 @@ array_relationships:
         table:
           name: activist_pressures
           schema: public
+  - name: analyze_activist_actions
+    using:
+      manual_configuration:
+        column_mapping:
+          id: widget_id
+        insertion_order: null
+        remote_table:
+          name: activist_actions
+          schema: analyze
   - name: donations
     using:
       foreign_key_constraint_on:
