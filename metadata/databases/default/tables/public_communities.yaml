@@ -22,13 +22,6 @@ array_relationships:
         table:
           name: dns_hosted_zones
           schema: public
-  - name: integrations
-    using:
-      foreign_key_constraint_on:
-        column: community_id
-        table:
-          name: integrations
-          schema: public
   - name: mobilizations
     using:
       foreign_key_constraint_on:
@@ -55,6 +48,7 @@ select_permissions:
         - fb_link
         - id
         - image
+        - integrations
         - mailchimp_api_key
         - mailchimp_group_id
         - mailchimp_list_id
@@ -82,6 +76,7 @@ update_permissions:
         - email_template_from
         - facebook_app_id
         - fb_link
+        - integrations
         - mailchimp_api_key
         - mailchimp_group_id
         - mailchimp_list_id
