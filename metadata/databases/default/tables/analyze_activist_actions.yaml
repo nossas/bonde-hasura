@@ -23,3 +23,16 @@ event_triggers:
     headers:
       - name: Authorization
         value: Basic {{N8N_WEBHOOK_TRIGGER_POSTGRES_AUTH}}
+  - name: turnio-activist_actions
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: '{{N8N_WEBHOOK_URL}}/turnio/activist-action'
+    headers:
+      - name: Authorization
+        value: Basic {{N8N_WEBHOOK_TRIGGER_POSTGRES_AUTH}}
