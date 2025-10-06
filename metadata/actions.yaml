@@ -55,6 +55,24 @@ actions:
         template_engine: Kriti
         url: '{{$base_url}}/task-status/{{$body.input.task_id}}'
         version: 2
+  - name: turnio_create_custom_field
+    definition:
+      kind: synchronous
+      handler: '{{N8N_WEBHOOK_URL}}/turnio/custom-field'
+      headers:
+        - name: Authorization
+          value: Basic {{N8N_WEBHOOK_TRIGGER_POSTGRES_AUTH}}
+      request_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "widget_id": $body.input.params.widget_id,
+              "custom_field": $body.input.params.custom_field
+            }
+        template_engine: Kriti
+        version: 2
+    comment: Criar campo customizado na integração com Turn.io
 custom_types:
   enums: []
   input_objects:
@@ -65,6 +83,7 @@ custom_types:
     - name: CertificateInput
     - name: PageInput
     - name: UpdateCertificateInput
+    - name: CreateCustomFieldInput
   objects:
     - name: MailchimpStart
     - name: MailchimpStatus
@@ -75,6 +94,7 @@ custom_types:
     - name: DeleteRecordsResult
     - name: RecordResult
     - name: UpdateCertificateResult
+    - name: CreateCustomFieldOutput
   scalars:
     - name: String
     - name: JSON

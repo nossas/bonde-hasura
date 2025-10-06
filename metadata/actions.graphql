@@ -35,6 +35,12 @@ type Query {
   ): JSON
 }
 
+type Mutation {
+  turnio_create_custom_field(
+    params: CreateCustomFieldInput!
+  ): CreateCustomFieldOutput
+}
+
 input DomainInput {
   domain_name: String!
   community_id: Int!
@@ -72,6 +78,11 @@ input PageInput {
 
 input UpdateCertificateInput {
   id: Int!
+}
+
+input CreateCustomFieldInput {
+  widget_id: Int!
+  custom_field: String!
 }
 
 type MailchimpStart {
@@ -135,6 +146,11 @@ type UpdateCertificateResult {
   domain: String
   is_active: Boolean
   dns_hosted_zone_id: Int
+}
+
+type CreateCustomFieldOutput {
+  custom_field: String!
+  created_at: timestamp!
 }
 
 scalar String
