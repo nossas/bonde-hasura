@@ -72,6 +72,8 @@ actions:
             }
         template_engine: Kriti
         version: 2
+    permissions:
+      - role: user
     comment: Criar campo customizado na integração com Turn.io
 custom_types:
   enums: []
