@@ -41,6 +41,13 @@ type Mutation {
   ): CreateCustomFieldOutput
 }
 
+type Mutation {
+  upload_s3(
+    filename: String!
+    content_type: String!
+  ): UploadS3Output
+}
+
 input DomainInput {
   domain_name: String!
   community_id: Int!
@@ -151,6 +158,10 @@ type UpdateCertificateResult {
 type CreateCustomFieldOutput {
   custom_field: String!
   created_at: timestamp!
+}
+
+type UploadS3Output {
+  signed_url: String
 }
 
 scalar String
