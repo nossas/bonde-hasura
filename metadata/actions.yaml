@@ -75,6 +75,35 @@ actions:
     permissions:
       - role: user
     comment: Criar campo customizado na integração com Turn.io
+  - name: upload_s3
+    definition:
+      kind: synchronous
+      handler: '{{API_UPLOADS_URL}}'
+      forward_client_headers: true
+      request_transform:
+        method: GET
+        query_params:
+          contentType: '{{$body.input.content_type}}'
+          objectName: '{{$body.input.filename}}'
+        request_headers:
+          add_headers: {}
+          remove_headers:
+            - content-type
+        template_engine: Kriti
+        version: 2
+      response_transform:
+        body:
+          action: transform
+          template: |-
+            {
+              "signed_url": {{$body.signedUrl}}
+            }
+        template_engine: Kriti
+        version: 2
+    permissions:
+      - role: common_user
+      - role: user
+    comment: Upload files on S3
 custom_types:
   enums: []
   input_objects:
