@@ -23,38 +23,6 @@ actions:
       handler: '{{API_DOMAINS_URL}}/actions/delete-record'
     permissions:
       - role: user
-  - name: router_add_operation
-    definition:
-      kind: synchronous
-      handler: '{{API_ROUTER_URL}}'
-      forward_client_headers: true
-      request_transform:
-        body:
-          action: transform
-          template: '{{$body.input}}'
-        method: POST
-        query_params: {}
-        template_engine: Kriti
-        url: '{{$base_url}}/add-operation'
-        version: 2
-    permissions:
-      - role: user
-    comment: Método da Bonde Router API usado para realizar operações com domínios e certificados.
-  - name: router_task_status
-    definition:
-      kind: ""
-      handler: '{{API_ROUTER_URL}}'
-      forward_client_headers: true
-      request_transform:
-        method: GET
-        query_params: {}
-        request_headers:
-          add_headers: {}
-          remove_headers:
-            - content-type
-        template_engine: Kriti
-        url: '{{$base_url}}/task-status/{{$body.input.task_id}}'
-        version: 2
   - name: turnio_create_custom_field
     definition:
       kind: synchronous
@@ -126,6 +94,9 @@ custom_types:
     - name: RecordResult
     - name: UpdateCertificateResult
     - name: CreateCustomFieldOutput
+    - name: ApplyTemplateOutput
+    - name: SignUploadOutput
+    - name: UploadS3Output
   scalars:
     - name: String
     - name: JSON

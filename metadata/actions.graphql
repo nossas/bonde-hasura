@@ -23,19 +23,6 @@ type Mutation {
 }
 
 type Mutation {
-  router_add_operation(
-    domains: [String]!
-    operation: String!
-  ): JSON
-}
-
-type Query {
-  router_task_status(
-    task_id: String!
-  ): JSON
-}
-
-type Mutation {
   turnio_create_custom_field(
     params: CreateCustomFieldInput!
   ): CreateCustomFieldOutput
@@ -158,6 +145,31 @@ type UpdateCertificateResult {
 type CreateCustomFieldOutput {
   custom_field: String!
   created_at: timestamp!
+}
+
+type ApplyTemplateOutput {
+  id: Int!
+  name: String
+  user_id: Int
+  color_scheme: String
+  facebook_share_title: String
+  facebook_share_description: String
+  header_font: String
+  body_font: String
+  facebook_share_image: String
+  slug: String
+  custom_domain: String
+  twitter_share_text: String
+  community_id: Int
+  goal: String
+  favicon: String
+  created_at: String
+  updated_at: String
+  template_mobilization_id: Int
+}
+
+type SignUploadOutput {
+  signed_url: String!
 }
 
 type UploadS3Output {
